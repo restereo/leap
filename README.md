@@ -100,11 +100,6 @@ Simple flow-control tool for coffee-script. It makes async coding much easier.
     saveToCache user, likes, views, @
   ```
 
-- **,**
-
-  Functions, pased to leap, .then or .and are executed in parallel
-
-
 - **.rescue(handler)**
 
   All errors stops execution of a flow and processed by handler. Error is passed by first argument
@@ -121,25 +116,26 @@ Simple flow-control tool for coffee-script. It makes async coding much easier.
 - **callbacks: @ and @next**
 
   Will be documented soon. see tests.
+
 - **leap.map(iterator)**
 - **.and.map(iterator)**
 - **.then.map(iterator)**
 
   Will be documented soon. see tests.
 
-- *leap.reduce(iterator)**
+- **leap.reduce(iterator)**
 - **.and.reduce(iterator)**
 - **.then.reduce(iterator)*
 
   Will be documented soon. see tests.
 
-- *leap.filter(iterator)**
+- **leap.filter(iterator)**
 - **.and.filter(iterator)**
 - **.then.filter(iterator)*
 
   Will be documented soon. see tests.
 
-- *leap.reject(iterator)**
+- **leap.reject(iterator)**
 - **.and.reject(iterator)**
 - **.then.reject(iterator)*
 
