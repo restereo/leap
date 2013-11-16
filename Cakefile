@@ -5,7 +5,7 @@ compile = (source, target) ->
 	fs.writeFileSync target, require('coffee-script').compile fs.readFileSync source, 'utf-8'
 
 minify = (source, target) ->
-	fs.writeFileSync target, require("uglify-js").minify source
+	fs.writeFileSync target, (require("uglify-js").minify source).code
 
 run = (command) -> exec command, (err, stdout, stderr) ->
 	throw err if err
