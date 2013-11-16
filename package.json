@@ -1,0 +1,28 @@
+{
+  "name": "leap",
+  "version": "0.1.0",
+  "description": "leap is a simple flow-control tool for coffee-script",
+  "keywords": ["flow-control", "flow", "coffee", "simple", "leap", "async", "invoke", "first"],
+  "license": "MIT",
+  "author": "Vladimir Tarasov <vladimir.tarasov@gmail.com>",
+  "bugs": {
+    "email": "vladimir.tarasov@gmail.com"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/restereo/leap.git"
+  },
+  "main": "./lib/leap.js",
+  "devDependencies": {
+    "underscore": "1.5.x",
+    "coffee-script": "1.6.x",
+    "cson": "1.4.x",
+    "chai": "1.8.x",
+    "uglify-js" : "2.4.x",
+    "mocha": "1.14.x"
+  },
+  "scripts": {
+    "build": "cake bake",
+    "test": "cake test"
+  }
+}
