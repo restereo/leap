@@ -125,19 +125,19 @@ Simple flow-control tool for coffee-script. It makes async coding much easier.
 
 - **leap.reduce(iterator)**
 - **.and.reduce(iterator)**
-- **.then.reduce(iterator)*
+- **.then.reduce(iterator)**
 
   Will be documented soon. see tests.
 
 - **leap.filter(iterator)**
 - **.and.filter(iterator)**
-- **.then.filter(iterator)*
+- **.then.filter(iterator)**
 
   Will be documented soon. see tests.
 
 - **leap.reject(iterator)**
 - **.and.reject(iterator)**
-- **.then.reject(iterator)*
+- **.then.reject(iterator)**
 
   Will be documented soon. see tests.
 
