@@ -1,38 +1,129 @@
-# leap.coffee
+# leap
 
-leap is a tiny experimental flow-control tool for coffee-script
+Simple flow-control tool for coffee-script. It makes async coding much easier.
 
-Basicly, it is invoke.js with some tweaks and async map/reduce support.
+## Examples
+
+-
+    leap ->
+      #first async function
+    , ->
+      #second async function
+    , ->
+      # all functions are executed in parallel
+-
+    leap ->
+      # do something async
+      @next results
+    .then (res) ->
+      # do something async with results
+      async_function res, @
+    .and (res) ->
+      # do something else with it in parallel
+      another_async_function res, @
+    .then ([first_res, second_res]) ->
+      # use data from async results of previous step
+-
+    leap ->
+      async_function ["Kinks", "Beatles", "United States of America"], @
+    .then.map (rockband) ->
+      async_function "The #{rockband}", @
+    .then (bands) ->
+      bands.should.be.deep.equal [
+        "The Kinks"
+        "The Beatles"
+        "The United States of America"
+      ]
+    .rescue (err) ->
+      #handle all async errors in one place
+
 
 ## Usage
 
-    leap (flow) ->
-      # first do something async
-    .then (res, flow) ->
-      # then do something with result
-    .and (res, flow) ->
-      # and parallel async
-    .then ([first, second], flow) ->
-      # then got results from both
-    .and.each (el, flow) ->
-      # and run async each
+- install via npm
+    npm install leap
+
+- require in your code
+    leap = require 'leap'
+
+## API
+
+- *leap(functions...)*
+
+  Run one ore more functions as a first step of sequence. All functions are called with callback as first parameter. Also, callback is a context of all functions.
+
+    leap (callback) ->
+      fs.readFile 'file', callback
+
+    is the same as
+
+    leap ->
+      fs.readFile 'file', @
+
+- *.then(functions...)*
+
+  Add one o more functions to be executed after previous step. All functions are called with results of previous step as first parameter, callback as second parameter. Also, callback is a context.
+
+    leap ->
+      fs.readFile 'file', @
+    .then (content) ->
+      db.create content, @
+    , (content) ->
+      some_api_request.find content, @
+    .then ([db_entry, api_response]) ->
+      #
+
+- *.and(functions...)*
+
+  Add functions to current step. All functions get results from previous step as first parameter. Also, callback is a context and second parameter.
+
+  leap ->
+    model.countLikes user, @
+  .and  ->
+    model.countViews user, @
+  .then ([likes, views]) ->
+    addToResponse likes, views
+    do @
+  .and ([likes, views]) ->
+    saveToCache user, likes, views, @
+
+
+- *, *
+
+  Functions, pased to leap, .then or .and are executed in parallel
+
+
+- *.rescue(handler)*
+  All errors stops execution of a flow and processed by handler. Error is passed by first argument
+
+    leap ->
+      fs.readFile 'test1', @
+    , ->
+      fs.readFile 'test2', @
     .rescue (err) ->
-      # also, handle all errors in one place
+      console.log err
+
+
+- *callbacks: @ and @next*
+  Will be documented soon. see tests.
+- *leap.map(iterator) & .and.map(iterator) & .then.map(iterator)*
+  Will be documented soon. see tests.
+- *leap.reduce(iterator) & .and.reduce(iterator) & .then.reduce(iterator)*
+  Will be documented soon. see tests.
+- *leap.filter(iterator) & .and.filter(iterator) & .then.filter(iterator)*
+  Will be documented soon. see tests.
+- *leap.reject(iterator) & .and.reject(iterator) & .then.reject(iterator)*
+  Will be documented soon. see tests.
+
+## Inspired by
+
+- [invoke.js](https://github.com/repeatingbeats/invoke) by Steve Lloyd
+- [first](https://github.com/DanielBaulig/first) by Daniel Baulig
+- [async.js](https://github.com/caolan/async) by Caolan McMahon
 
 ## Testing
 
-    $ npm install cson
-    $ cake pack
-
-then
-
     $ npm test
-
-## Building
-
-    $ npm install cson
-    $ cake pack
-    $ cake bake
 
 ## License
 
