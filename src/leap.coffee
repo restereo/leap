@@ -90,13 +90,13 @@ All merit is dedicated to the benefit of all beings.
 		functions: []
 
 		# create a step
-		constructor: (fn) ->
+		constructor: (actions) ->
 			@_next = @_err = null
 
-			if Array.isArray fn
-				@functions = fn
-			else if fn and fn.call and fn.apply
-				@functions = [fn]
+			if Array.isArray actions
+				@functions = actions
+			else if typeof actions is 'function'
+				@functions = [actions]
 
 		# create next step
 		child: (fn) ->
@@ -179,7 +179,7 @@ All merit is dedicated to the benefit of all beings.
 		# as many parallel functions
 		((param) ->
 			flow.and ->
-				iterator.call @, param, @
+				iterator.call @, param , @
 		) i for i in collection
 
 		# callback is optional
@@ -205,7 +205,7 @@ All merit is dedicated to the benefit of all beings.
 		# in series
 		((param) ->
 			flow.then (memo) ->
-				iterator.call @, param, memo, @
+				iterator.call @, param, memo , @
 		) i for i in collection
 
 		if next
