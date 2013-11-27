@@ -41,7 +41,7 @@ describe 'leap', ->
 		.and ->
 			fs.rmdir '_c_dir', @
 		.then ->
-			yeah()
+			do yeah
 		.rescue yeah
 		# all async errors handled in one place
 		# in this case, by mocha
@@ -219,9 +219,11 @@ describe 'leap', ->
 			delay @, 0
 		.and.map (n) ->
 			delay @, n*n*n
+		.and.map (n, next) ->
+			delay next, n*2
 		.rescue(done)
 		.then (nums) ->
-			nums.should.be.deep.equal [0,[1,8,27]]
+			nums.should.be.deep.equal [0,[1,8,27], [2, 4, 6]]
 			do done
 
 
