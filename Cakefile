@@ -13,9 +13,9 @@ run = (command) -> exec command, (err, stdout, stderr) ->
 
 task 'build', 'and minify', (options) ->
 	run 'npm install'
-	compile './lib/leap.coffee', './lib/leap.js'
+	compile './src/leap.coffee', './lib/leap.js'
 	minify './lib/leap.js', './leap.min.js'
 
 task 'test', 'with mocha', (options) ->
 	invoke 'build', options
-	run './node_modules/.bin/mocha --compilers coffee:coffee-script'
+	run './node_modules/.bin/mocha'
