@@ -64,6 +64,14 @@ All merit is dedicated to the benefit of all beings.
 			@_rescue = fn
 			@
 
+		# default rescue handler
+		_rescue: (err) ->
+
+			console.log 'leap failed'
+			console.log err
+
+			# throw Error err
+
 		# run
 		yeah: ->
 			@root.run null, @_rescue
