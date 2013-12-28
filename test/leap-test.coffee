@@ -300,3 +300,20 @@ describe 'leap', ->
 	###
 	*** 02013.11
 	###
+	it 'has smart .map support', (done) ->
+
+		leap.map ['q'], (letter) ->
+			@next letter
+		.then (letters) ->
+			letters.should.be.deep.equal ['q']
+			do @
+		.then ->
+			@next ['q', 'w']
+		.then.map (letter) ->
+			@next letter
+		.then (letters) ->
+			letters.should.be.deep.equal ['q', 'w']
+
+			do done
+
+

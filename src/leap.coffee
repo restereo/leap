@@ -190,6 +190,10 @@ All merit is dedicated to the benefit of all beings.
 				iterator.call @, param , @
 		) i for i in collection
 
+
+		if collection.length is 1
+			flow.then (res) -> @next [res]
+
 		# callback is optional
 		if next
 			flow.then (res) -> next null, res
