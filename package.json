@@ -1,6 +1,6 @@
 {
   "name": "leap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "leap is a simple flow-control tool for coffee-script",
   "keywords": [
     "flow-control",
@@ -31,7 +31,7 @@
     "mocha": "1.14.x"
   },
   "scripts": {
-    "build": "cake bake",
+    "build": "cake build",
     "test": "cake test"
   }
 }

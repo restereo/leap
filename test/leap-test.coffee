@@ -317,3 +317,17 @@ describe 'leap', ->
 			do done
 
 
+	it 'is friendly to empty arrays', (done) ->
+
+		leap.map [],->
+			throw new Error 'Erorrneus iterator execution on empty map'
+		.then (empty)->
+			empty.should.be.deep.equal []
+			@next []
+		.then.reduce ->
+			throw new Error 'Erorrneus iterator execution on empty reduce'
+		.then (empty) ->
+			if typeof empty isnt 'undefined'
+				throw new Error 'empty reduce should not return result'
+			do done
+

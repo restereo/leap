@@ -183,16 +183,24 @@ All merit is dedicated to the benefit of all beings.
 
 		flow = new Flow
 
-		# execute iterator with diferent params
-		# as many parallel functions
-		((param) ->
+		if not collection or collection.length is 0
+
 			flow.and ->
-				iterator.call @, param , @
-		) i for i in collection
+				do @
+			.then ->
+				@next []
+
+		else
+			# execute iterator with diferent params
+			# as many parallel functions
+			((param) ->
+				flow.and ->
+					iterator.call @, param , @
+			) i for i in collection
 
 
-		if collection.length is 1
-			flow.then (res) -> @next [res]
+			if collection.length is 1
+				flow.then (res) -> @next [res]
 
 		# callback is optional
 		if next
@@ -271,6 +279,6 @@ All merit is dedicated to the benefit of all beings.
 	leap.of =
 		faith: leap
 
-	leap.VERSION = "0.1.0"
+	leap.VERSION = "0.1.1"
 
 	return leap
