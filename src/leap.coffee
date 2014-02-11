@@ -67,14 +67,16 @@ All merit is dedicated to the benefit of all beings.
 		# default rescue handler
 		_rescue: (err) ->
 
-			console.log 'leap failed'
-			console.log err
-
-			# throw Error err
+			throw Error err
 
 		# run
 		yeah: ->
 			@root.run null, @_rescue
+
+		back: (fn)->
+			@then (x) -> fn null, x
+			@rescue fn
+
 
 		# first step doesn't accept results from previous steps
 		# so first step functions are modified
@@ -279,6 +281,8 @@ All merit is dedicated to the benefit of all beings.
 	leap.of =
 		faith: leap
 
-	leap.VERSION = "0.1.1"
+	leap.I = (x, cb) -> cb null, x
+
+	leap.VERSION = "0.1.2"
 
 	return leap

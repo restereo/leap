@@ -1,3 +1,5 @@
+require 'coffee-script/register'
+
 fs = require 'fs'
 {exec} = require 'child_process'
 

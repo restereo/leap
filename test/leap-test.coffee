@@ -331,3 +331,21 @@ describe 'leap', ->
 				throw new Error 'empty reduce should not return result'
 			do done
 
+
+	it 'has cool .back method for callbacks', (done) ->
+
+		leap -> @next 'test'
+		.then (t) -> t.should.be.equal 'test'; do @
+		.back done
+
+	it 'has some _.identity monada magic', (done) ->
+
+		leap ->
+			@next [1, 2, 3]
+		.then leap.I
+		.and leap.I
+		.then ([i, ii]) ->
+			i.should.be.deep.equal ii
+			i.should.be.deep.equal [1,2,3]
+			do @
+		.back done
