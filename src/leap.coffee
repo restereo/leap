@@ -277,12 +277,20 @@ All merit is dedicated to the benefit of all beings.
 		@flow.and  (arr, cb) -> leap.reject arr, fn, cb
 
 
+	_property = (key) -> (obj) -> obj[key]
+	# async pluck
+	leap.pluck = (key) -> (collection, next) ->
+		@ null, collection.map _property key
+
+	Flow::then.pluck = (key) ->
+		@flow.then leap.pluck key
+
 	# http://en.wikipedia.org/wiki/Leap_of_faith
 	leap.of =
 		faith: leap
 
 	leap.I = (x, cb) -> cb null, x
 
-	leap.VERSION = "0.1.2"
+	leap.VERSION = "0.1.3"
 
 	return leap

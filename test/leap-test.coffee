@@ -338,7 +338,7 @@ describe 'leap', ->
 		.then (t) -> t.should.be.equal 'test'; do @
 		.back done
 
-	it 'has some _.identity monada magic', (done) ->
+	it 'has some _.identity magic', (done) ->
 
 		leap ->
 			@next [1, 2, 3]
@@ -349,3 +349,13 @@ describe 'leap', ->
 			i.should.be.deep.equal [1,2,3]
 			do @
 		.back done
+
+	it 'has pluck!', (done)->
+
+		leap ->
+			delay @, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]
+		.then.pluck 'name'
+		.then (stooges) ->
+			stooges.should.be.deep.equal ["moe", "larry", "curly"]
+			do done
+
