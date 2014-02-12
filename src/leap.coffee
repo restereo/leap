@@ -27,6 +27,8 @@ All merit is dedicated to the benefit of all beings.
 	# defer function is diferent for node and browser
 	defer = process?.nextTick or (f) -> setTimeout f, 1
 
+	identity = (x, cb) ->	cb null, x
+
 	# Basic class
 	class Flow
 
@@ -58,6 +60,14 @@ All merit is dedicated to the benefit of all beings.
 
 			@current.sibling fn
 			@
+
+		# pass arguments down on flow
+		identity: ->
+
+			if @current is @root
+				@then identity
+
+			@and identity
 
 		# add error handler
 		rescue: (fn) ->
@@ -285,11 +295,12 @@ All merit is dedicated to the benefit of all beings.
 	Flow::then.pluck = (key) ->
 		@flow.then leap.pluck key
 
+	leap.I = identity
+
 	# http://en.wikipedia.org/wiki/Leap_of_faith
 	leap.of =
 		faith: leap
 
-	leap.I = (x, cb) -> cb null, x
 
 	leap.VERSION = "0.1.3"
 

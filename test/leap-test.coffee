@@ -340,17 +340,17 @@ describe 'leap', ->
 
 	it 'has some _.identity magic', (done) ->
 
-		leap ->
-			@next [1, 2, 3]
-		.then leap.I
-		.and leap.I
-		.then ([i, ii]) ->
-			i.should.be.deep.equal ii
-			i.should.be.deep.equal [1,2,3]
-			do @
-		.back done
+		expect(leap(->).identity).to.not.be.undefined
 
-	it 'has pluck!', (done)->
+		(typeof leap(->).identity).should.equals 'function'
+
+		leap(-> @next String Math.random())
+		.identity()
+		.then ([i, j]) ->
+			i.should.be.deep.equal j
+			do done
+
+	it 'has _.pluck!', (done)->
 
 		leap ->
 			delay @, [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}]
