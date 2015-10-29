@@ -23,12 +23,12 @@
   },
   "main": "./lib/leap.js",
   "devDependencies": {
-    "underscore": "1.6.x",
-    "coffee-script": "1.7.x",
-    "cson": "1.4.x",
-    "chai": "1.8.x",
-    "uglify-js": "2.4.x",
-    "mocha": "1.14.x"
+    "underscore": "1.8.x",
+    "coffee-script": "1.10.x",
+    "cson": "3.0.x",
+    "chai": "3.4.x",
+    "uglify-js": "2.5.x",
+    "mocha": "2.3.x"
   },
   "scripts": {
     "build": "cake build",
